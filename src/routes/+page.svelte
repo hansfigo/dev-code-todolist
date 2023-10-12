@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
-	let arr = ['Tugas', 'Madang', 'Game'];
-	// let arr : any= [];
+	// let arr = ['Tugas', 'Madang', 'Game'];
+	let arr: any = [];
 </script>
 
-<div class="mt-8 flex flex-col items-center px-8">
+<div class="mt-8 flex flex-col items-center h-[80vh] relative px-8">
 	<div class="flex justify-between container">
 		<h1 data-cy="activity-title" class="font-bold text-2xl">Activity</h1>
 		<button
@@ -15,7 +15,9 @@
 		>
 	</div>
 	{#if arr.length === 0 || arr.length <= 0}
-		<img src="activity-empty-state.svg" alt="empty" />
+		<div class="flex justify-center items-center w-full h-full">
+			<img class="md:h-[24rem]" src="activity-empty-state.svg" alt="empty" />
+		</div>
 	{:else}
 		<div class="flex flex-wrap gap-8 items-start w-full container mt-4">
 			{#each arr as data, i}
