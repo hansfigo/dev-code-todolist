@@ -1,3 +1,5 @@
+import activityList from "$lib/stores/activity";
+
 const useApi = () => {
 
     const url = 'https://todo.api.devcode.gethired.id/activity-groups?email=claudiofigo0303@gmail.com';
@@ -24,7 +26,13 @@ const useApi = () => {
             }
 
             const responseData = await response.json();
+
+
             console.log('POST request berhasil:', responseData);
+
+            const updatedData = await get();
+            activityList.set(updatedData)
+
         } catch (error) {
             console.error('Terjadi kesalahan:', error);
         }
@@ -45,11 +53,14 @@ const useApi = () => {
         fetch(url, {
             method: 'DELETE'
         })
-            .then(response => {
+            .then(async response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 console.log('Activity berhasil dihapus');
+
+                const updatedData = await get();
+                activityList.set(updatedData)
             })
             .catch(error => {
                 console.error('Terjadi kesalahan:', error);

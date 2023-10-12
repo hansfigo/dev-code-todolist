@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import activityList from '$lib/stores/activity.js';
 	import useApi from '$lib/utils/api';
 	import convertDate from '$lib/utils/date.js';
 	import { writable } from 'svelte/store';
 
 	export let data;
-	const activityList = writable(data.data.data);
+
+	activityList.set(data.data.data)
 
 	const openModal = () => {
 		const modal = document.getElementById('my_modal_2') as HTMLDialogElement;
@@ -16,10 +18,9 @@
 
 	const api = useApi();
 
+	
 	const handleAddActivity = async () => {
 		api.send();
-
-		activityList.set(await api.get());
 	};
 </script>
 
@@ -47,7 +48,7 @@
 			<img class="md:h-[24rem]" src="activity-empty-state.svg" alt="empty" />
 		</div>
 	{:else}
-		<div class="flex flex-wrap gap-8 items-start w-full container mt-4">
+		<div class="flex flex-wrap gap-6  items-start w-full container mt-4">
 			{#each $activityList as data, i}
 				<div
 				
