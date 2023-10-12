@@ -63,7 +63,7 @@
 			<img class="md:h-[24rem]" src="../todo-empty-state.png" alt="empty" />
 		</div>
 	{:else}
-		<div class="flex flex-col gap-8 w-full mt-8">
+		<div class="flex flex-col gap-8 w-full mt-8 pb-12">
 			{#each $TodoListItemStore as todo}
 				<TodoListCard id={todo.id} isActive={todo.is_active} priority={todo.priority} activityId={$activityDetailStore.id} title={todo.title}/>
 			{/each}

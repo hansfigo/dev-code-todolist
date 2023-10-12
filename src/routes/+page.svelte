@@ -9,7 +9,7 @@
 
 </script>
 
-<div class="mt-8 flex flex-col items-center h-[80vh] relative px-8">
+<div class="py-8 flex flex-col items-center h-[80vh] relative px-8">
 	<div class="flex justify-between container">
 		<h1 data-cy="activity-title" class="font-bold text-2xl">Activity</h1>
 		<button
