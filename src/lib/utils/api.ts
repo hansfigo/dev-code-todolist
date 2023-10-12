@@ -73,5 +73,6 @@ const useApi = () => {
         remove: del
     };
 }
+const api = useApi();
 
-export default useApi
+export default api
