@@ -26,11 +26,6 @@
 		activityDetail.update($activityTitleStore, $activityDetailStore.id);
 		toggleIsEditing();
 	};
-
-
-	TodoListItemStore.subscribe((e)=>{
-		console.log("INI SUBRET",e);
-	})
 </script>
 
 <AddListItemModal id={$activityDetailStore.id} />
@@ -63,7 +58,7 @@
 			>+ Tambah
 		</button>
 	</div>
-	{#if $activityDetailStore.todo_items.length === 0 || $activityDetailStore.todo_items.length <= 0}
+	{#if $TodoListItemStore.length === 0 || $TodoListItemStore.length <= 0}
 		<div class="flex justify-center items-center w-full h-full">
 			<img class="md:h-[24rem]" src="../todo-empty-state.png" alt="empty" />
 		</div>

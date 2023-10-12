@@ -29,7 +29,7 @@
 	}
 
 	$: {
-		// Menggunakan reactive statement untuk menetapkan ikon saat nilai prioritas berubah
+		// Menggunakan reactive statement 
 		setIcon(priority);
     isChecked.set(isActive == 1 ? false : true)
 	}
