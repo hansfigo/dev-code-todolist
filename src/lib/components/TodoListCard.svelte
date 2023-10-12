@@ -31,37 +31,14 @@
 	$: {
 		// Menggunakan reactive statement untuk menetapkan ikon saat nilai prioritas berubah
 		setIcon(priority);
+    isChecked.set(isActive == 1 ? false : true)
 	}
 
-  console.log($isChecked);
-  
-  let htmlTitle = ''
-	if (!$isChecked) {
-		htmlTitle = `<span >${title}</span>`;
-	} else {
-		htmlTitle = `<strike  class="text-gray-400">${title}</strike>`;
-	}
 
 	// Fungsi untuk menentukan dekorasi teks saat checkbox diubah
 	async function toggleTextDecoration() {
 		activityDetail.updateToDoList(title, id, $isChecked ? 0 : 1, activityId);
 
-		if (!$isChecked) {
-			htmlTitle = `<span >${title}</span>`;
-		} else {
-			htmlTitle = `<strike  class="text-gray-400">${title}</strike>`;
-		}
-
-		// if (condition) {
-
-		// }
-		// if (is_active === 1) {
-		//   if ($isChecked) {
-		//     title = `<span class="text-gray-400"><strike>${title}</strike></span>`;
-		//   } else {
-		//     title = title.replace(/<strike class="text-gray-400">/g, '').replace(/<\/strike>/g, '');
-		//   }
-		// }
 	}
 </script>
 
@@ -73,8 +50,12 @@
 			bind:checked={$isChecked}
 			on:change={toggleTextDecoration}
 		/>
-		<p>{$iconStore + priority}</p>
-		<p>{@html htmlTitle}</p>
+		<p>{$iconStore + isActive}</p>
+		{#if !$isChecked}
+			<p>{title}</p>
+		{:else}
+			<strike class="text-gray-400">{title}</strike>
+		{/if}
 		<img class="h-6 brightness-50" src="../todo-item-edit-button.png" alt="" />
 	</div>
 	<button on:click={() => activityDetail.delete(id.toString(), $activityDetailStore.id)}>

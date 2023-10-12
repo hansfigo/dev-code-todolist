@@ -26,6 +26,11 @@
 		activityDetail.update($activityTitleStore, $activityDetailStore.id);
 		toggleIsEditing();
 	};
+
+
+	TodoListItemStore.subscribe((e)=>{
+		console.log("INI SUBRET",e);
+	})
 </script>
 
 <AddListItemModal id={$activityDetailStore.id} />
