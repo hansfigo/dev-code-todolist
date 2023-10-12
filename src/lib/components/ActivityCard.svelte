@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import convertDate from "$lib/utils/date";
+	import { openModal } from "$lib/utils/modal";
 	import DeleteModal from "./DeleteModal.svelte";
 
     export let title : string
@@ -9,12 +10,6 @@
     export let created_at : string
 
 
-    const openModal = () => {
-		const modal = document.getElementById('delete_modal') as HTMLDialogElement;
-		if (modal) {
-			modal.showModal();
-		}
-	};
 </script>
 
 <DeleteModal {title} {id}/>
@@ -27,14 +22,14 @@
 <button on:click={()=> goto('/detail/'+id)} class="h-full flex justify-start">
 	<h2 class="text-lg font-bold">{title}</h2>
 </button>
-	<div class="flex justify-between w-full">
-		<p class="text-gray-500">{convertDate(created_at)}</p>
+	<div class="flex justify-between w-full items-center">
+		<p class="text-gray-500 text-sm">{convertDate(created_at)}</p>
 		<button
 			on:click={async () => {
-                openModal()
+                openModal('delete_modal')
 			}}
 		>
-			<img src="delete-button.png" alt="" />
+			<img class="h-5" src="delete-button.png" alt="" />
 		</button>
 	</div>
 </div>

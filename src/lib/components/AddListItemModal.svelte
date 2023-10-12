@@ -1,0 +1,47 @@
+<script lang="ts">
+	import { writable } from 'svelte/store';
+
+
+
+
+</script>
+
+<dialog id="add_list_item_modal" class="modal">
+	<div class="modal-box md:min-w-[600px]">
+		<p class="text-lg font-bold pb-4">Tambahkan List Item</p>
+		<hr />
+		<div class="w-full flex flex-col mt-6 gap-6">
+			<div>
+				<label for="Nama List" class="block mb-2 text-base font-bold">Nama List Item</label>
+				<input
+					name="Nama List"
+					type="text"
+					placeholder="Type here"
+					class="input input-bordered w-full"
+				/>
+			</div>
+
+			<div>
+				<label for="Priority" class="block mb-2 text-base font-bold">Priority</label>
+				<select name="Priority" class="select select-bordered w-full">
+					<option disabled selected>🔴 Very High</option>
+					<option>🟠 High</option>
+					<option>🟢 Medium</option>
+					<option>🔵 Low</option>
+					<option>🟣 Very Low</option>
+				</select>
+			</div>
+		</div>
+		<hr class="mt-8" />
+
+		<form method="dialog" class="flex justify-end gap-4 mt-6">
+			<button
+				class="bg-main-blue px-5 py-2 font-semibold rounded-full text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
+				>Simpan</button
+			>
+		</form>
+	</div>
+	<form method="dialog" class="modal-backdrop">
+		<button>close</button>
+	</form>
+</dialog>

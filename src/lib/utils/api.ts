@@ -15,7 +15,7 @@ const useApi = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(data)
         };
 
         try {
