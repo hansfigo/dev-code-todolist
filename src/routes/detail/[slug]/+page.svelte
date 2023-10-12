@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import AddListItemModal from '$lib/components/AddListItemModal.svelte';
+	import TodoListCard from '$lib/components/TodoListCard.svelte';
 	import {
+		TodoListItemStore,
 		activityDetail,
 		activityDetailStore,
 		activityTitleStore
@@ -14,6 +16,7 @@
 
 	activityDetailStore.set(data.data);
 	activityTitleStore.set($activityDetailStore.title);
+	TodoListItemStore.set($activityDetailStore.todo_items);
 
 	const toggleIsEditing = () => {
 		isEditing.set(!$isEditing);
@@ -61,15 +64,8 @@
 		</div>
 	{:else}
 		<div class="flex flex-col gap-8 w-full mt-8">
-			{#each $activityDetailStore.todo_items as todo}
-			<div class="py-8 px-12 shadow-md w-full bg-white  flex justify-between rounded-md">
-				<div class="flex gap-4">
-					<input type="checkbox" class="checkbox" />
-					<p>{todo.title}</p>
-					<img class="h-6 brightness-50" src="../todo-item-edit-button.png" alt="" />
-				</div>
-				<img class="h-5" src="../delete-button.png" alt="" />
-			</div>
+			{#each $TodoListItemStore as todo}
+				<TodoListCard id={todo.id} isActive={todo.is_active} priority={todo.priority} activityId={$activityDetailStore.id} title={todo.title}/>
 			{/each}
 		</div>
 	{/if}
