@@ -49,19 +49,25 @@
 	{:else}
 		<div class="flex flex-wrap gap-8 items-start w-full container mt-4">
 			{#each $activityList as data, i}
-				<button
-					on:click={() => {
-						goto(`/activity/${data}`);
-					}}
+				<div
+				
 					data-cy={`activity-item-${i}`}
 					class="w-[235px] h-[235px] px-8 py-6 bg-white rounded-md shadow-sm flex flex-col justify-between"
 				>
 					<h2 class="text-lg font-bold">{data.title}</h2>
 					<div class="flex justify-between w-full">
 						<p class="text-gray-500">{convertDate(data.created_at)}</p>
-						<img src="delete-button.png" alt="" />
+						<button
+							on:click={async () => {
+								await api.remove(data.id);
+
+								activityList.set(await api.get());
+							}}
+						>
+							<img src="delete-button.png" alt="" />
+						</button>
 					</div>
-				</button>
+				</div>
 			{/each}
 		</div>
 	{/if}
