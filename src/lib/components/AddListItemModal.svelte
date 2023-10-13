@@ -3,7 +3,7 @@
 	import { writable } from 'svelte/store';
 
 	export let id: string;
-    let priority : string;
+	let priority: string;
 
 	const namaListItem = writable('');
 
@@ -12,14 +12,20 @@
 	};
 </script>
 
-<dialog id="add_list_item_modal" class="modal">
+<dialog data-cy="modal-add" id="add_list_item_modal" class="modal">
 	<div class="modal-box md:min-w-[600px]">
-		<p class="text-lg font-bold pb-4">Tambahkan List Item</p>
+		<div class="flex justify-between items-center">
+			<p data-cy="modal-add-name-title" class="text-lg font-bold pb-4">Tambahkan List Item</p>
+			<form method="dialog">
+				<button data-cy="modal-add-close-button" class="btn btn-sm btn-circle btn-ghost text-lg">✕</button>
+			</form>
+		</div>
 		<hr />
 		<div class="w-full flex flex-col mt-6 gap-6">
 			<div>
 				<label for="Nama List" class="block mb-2 text-base font-bold">Nama List Item</label>
 				<input
+					data-cy="modal-add-name-input"
 					name="Nama List"
 					type="text"
 					placeholder="Type here"
@@ -30,19 +36,25 @@
 
 			<div>
 				<label for="Priority" class="block mb-2 text-base font-bold">Priority</label>
-				<select name="Priority" class="select select-bordered w-full" bind:value={priority}>
-                    <option value="very-high" disabled selected>🔴 Very High</option>
-                    <option value="high">🟠 High</option>
-                    <option value="normal">🟢 Normal</option>
-                    <option value="low">🔵 Low</option>
-                    <option value="very-low">🟣 Very Low</option>
-                  </select>
+				<select
+					data-cy="modal-add-priority-dropdown"
+					name="Priority"
+					class="select select-bordered w-full"
+					bind:value={priority}
+				>
+					<option value="very-high" disabled selected>🔴 Very High</option>
+					<option value="high">🟠 High</option>
+					<option value="normal">🟢 Normal</option>
+					<option value="low">🔵 Low</option>
+					<option value="very-low">🟣 Very Low</option>
+				</select>
 			</div>
 		</div>
 		<hr class="mt-8" />
 
 		<form method="dialog" class="flex justify-end gap-4 mt-6">
 			<button
+				data-cy="modal-add-save-button"
 				on:click={() => {
 					activityDetail.post($namaListItem, id, priority);
 					clearInput();

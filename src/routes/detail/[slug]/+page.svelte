@@ -9,9 +9,7 @@
 		activityDetail,
 		activityDetailStore,
 		activityTitleStore,
-
 		type TodoItem
-
 	} from '$lib/utils/activityDetail.js';
 	import { openModal } from '$lib/utils/modal.js';
 	import {
@@ -26,9 +24,14 @@
 	export let data;
 	const isEditing = writable<boolean>(false);
 
+		
+
 	activityDetailStore.set(data.data);
 	activityTitleStore.set($activityDetailStore.title);
 	TodoListItemStore.set($activityDetailStore.todo_items);
+
+	console.log($TodoListItemStore);
+
 
 	const toggleIsEditing = () => {
 		isEditing.set(!$isEditing);
@@ -58,7 +61,7 @@
 			// Jalankan fungsi untuk filter yang sudah selesai
 			sortedItems = sortByIsCompleted($TodoListItemStore);
 		} else {
-			// Tangani kondisi lain jika diperlukan
+			sortedItems = get(TodoListItemStore)
 		}
 
 		// Set hasil pengurutan ke TodoListItemStore
@@ -77,13 +80,18 @@
 
 			{#if $isEditing}
 				<input
+					data-cy="todo-title-edit-button"
 					bind:value={$activityTitleStore}
 					on:blur={saveValue}
 					type="text"
 					class="text-2xl font-bold bg-transparent border-b-2 border-black"
 				/>
 			{:else}
-				<button on:click={() => toggleIsEditing()} class="flex gap-4 items-center">
+				<button
+					data-cy="todo-title-edit-button"
+					on:click={() => toggleIsEditing()}
+					class="flex gap-4 items-center"
+				>
 					<h1 class="text-2xl font-bold">{$activityTitleStore}</h1>
 					<img class="h-6 brightness-50" src="../todo-item-edit-button.png" alt="" />
 				</button>
@@ -92,16 +100,17 @@
 		<div class="flex gap-4">
 			<div class="relative">
 				<select
+				data-cy="todo-sort-button"
 					name="Priority"
 					class="select select-bordered w-full"
 					id="prioritySelect"
 					bind:value={$sortByStore}
 				>
-					<option value="newest">Newest</option>
-					<option value="oldest">Oldest</option>
-					<option value="az">A-Z</option>
-					<option value="za">Z-A</option>
-					<option value="complete">Complete</option>
+					<option data-cy="sort-latest" value="newest">Newest</option>
+					<option data-cy="sort-oldest" value="oldest">Oldest</option>
+					<option data-cy="sort-az"  value="az">A-Z</option>
+					<option data-cy="sort-za"  value="za">Z-A</option>
+					<option data-cy="sort-unfinished" value="complete">Belum Selesai</option>
 				</select>
 			</div>
 			<button
@@ -114,7 +123,9 @@
 	</div>
 	{#if $TodoListItemStore.length === 0 || $TodoListItemStore.length <= 0}
 		<div class="flex justify-center items-center w-full h-full">
-			<img class="md:h-[24rem]" src="../todo-empty-state.png" alt="empty" />
+			<button data-cy="todo-empty-state" on:click={() => openModal('add_list_item_modal')}>
+				<img class="md:h-[24rem]" src="../todo-empty-state.png" alt="empty" />
+			</button>
 		</div>
 	{:else}
 		<div class="flex flex-col gap-8 w-full mt-8 pb-12 container">

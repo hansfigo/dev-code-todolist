@@ -31,7 +31,17 @@
 
 	{#if $activityList.length === 0 || $activityList.length <= 0}
 		<div class="flex justify-center items-center w-full h-full">
-			<img class="md:h-[24rem]" src="activity-empty-state.svg" alt="empty" />
+			<button
+			data-cy="activity-empty-state"
+				on:click={async () => {
+					await api.send();
+					isAdded.set(true);
+
+					setTimeout(() => isAdded.set(false), 1200);
+				}}
+			>
+				<img class="md:h-[24rem]" src="activity-empty-state.svg" alt="empty" />
+			</button>
 		</div>
 	{:else}
 		<div class="flex flex-wrap gap-6 items-start w-full container mt-4">

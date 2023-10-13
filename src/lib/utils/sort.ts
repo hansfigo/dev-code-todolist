@@ -22,7 +22,7 @@ function sortByTitleZA(items: TodoItem[]): TodoItem[] {
 
 // Fungsi untuk mengurutkan berdasarkan status is_active (sudah selesai)
 function sortByIsCompleted(items: TodoItem[]): TodoItem[] {
-    return items.filter(item => item.is_active === 0).concat(items.filter(item => item.is_active === 1));
+    return items.filter(item => item.is_active === 1).concat(items.filter(item => item.is_active === 0));
 }
 
 

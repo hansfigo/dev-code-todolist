@@ -9,13 +9,13 @@
 	export let isActive: number;
 	export let priority: string;
 	export let id: number;
-	export let i : number;
+	export let i: number;
 
 	const iconStore = writable(''); // Store untuk ikon
 	const isChecked = writable(isActive == 1 ? false : true); // Store untuk status checkbox
-	const titleStore = writable('')
-	const prioStore = writable('')
-	const idStore = writable()
+	const titleStore = writable('');
+	const prioStore = writable('');
+	const idStore = writable();
 	// Fungsi untuk menetapkan ikon berdasarkan prioritas
 	function setIcon(priority: string) {
 		let icon = '';
@@ -34,44 +34,46 @@
 	}
 
 	$: {
-		// Menggunakan reactive statement 
 		setIcon(priority);
-    	isChecked.set(isActive == 1 ? false : true)
-		titleStore.set(title)
-		prioStore.set(priority)
-		idStore.set(id)
-
+		isChecked.set(isActive == 1 ? false : true);
+		titleStore.set(title);
+		prioStore.set(priority);
+		idStore.set(id);
 	}
 
-
-	// Fungsi untuk menentukan dekorasi teks saat checkbox diubah
 	async function toggleTextDecoration() {
 		activityDetail.updateToDoList(title, id, $isChecked ? 0 : 1, activityId);
-
 	}
 </script>
 
-<EditListModal activityId={activityId} isActive={isActive} i={i} title={title} id={id} priority={priority}/>
+<EditListModal {activityId} {isActive} {i} {title} {id} {priority} />
 
-<div class="py-8 px-12 shadow-md w-full bg-white flex justify-between rounded-md">
+<div
+	data-cy={'todo-item-' + i}
+	class="py-8 px-12 shadow-md w-full bg-white flex justify-between rounded-md"
+>
 	<div class="flex gap-4">
 		<input
+			data-cy="todo_item_checkbox"
 			type="checkbox"
 			class="checkbox"
 			bind:checked={$isChecked}
 			on:change={toggleTextDecoration}
 		/>
-		<p>{$iconStore}</p>
+		<p data-cy="todo_item_priority_indicator">{$iconStore}</p>
 		{#if !$isChecked}
-			<p>{title}</p>
+			<p data-cy="todo_item_title">{title}</p>
 		{:else}
-			<strike class="text-gray-400">{title}</strike>
+			<strike data-cy="todo_item_title" class="text-gray-400">{title}</strike>
 		{/if}
-		<button on:click={()=> openModal('edit_list_item_modal'+i)}>
+		<button data-cy="todo_item_edit_button" on:click={() => openModal('edit_list_item_modal' + i)}>
 			<img class="h-6 brightness-50" src="../todo-item-edit-button.png" alt="" />
 		</button>
 	</div>
-	<button on:click={() => activityDetail.delete(id.toString(), $activityDetailStore.id)}>
+	<button
+		data-cy="todo_item_delete_button"
+		on:click={() => activityDetail.delete(id.toString(), $activityDetailStore.id)}
+	>
 		<img class="h-5" src="../delete-button.png" alt="" />
 	</button>
 </div>
