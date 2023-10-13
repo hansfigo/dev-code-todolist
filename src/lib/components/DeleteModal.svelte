@@ -6,10 +6,10 @@
 </script>
 
 <dialog id="delete_modal" class="modal">
-	<div data-cy="modal-delete" class="modal-box flex flex-col justify-center items-center">
+	<div  class="modal-box flex flex-col justify-center items-center">
 		<img src="delete-warning.png" alt="" />
 		<p class="py-4 text-center">Apakah anda yakin menghapus activity <br />“{title}”?</p>
-		<form method="dialog" class="flex gap-4 jb">
+		<form data-cy="modal-delete" method="dialog" class="flex gap-4 jb">
 			<button data-cy="modal-delete-cancel-button" class="batal-button">Batal</button>
 			<button
 				data-cy="modal-delete-confirm-button"
