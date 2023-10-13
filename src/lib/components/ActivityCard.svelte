@@ -14,8 +14,7 @@
 
 <div
 	data-cy={`activity-item`}
-	class="w-[235px] h-[235px] px-8 py-6 bg-white rounded-md shadow-sm flex flex-col justify-between"
->
+	class="w-[235px] h-[235px] px-8 py-6 bg-white rounded-md shadow-sm flex flex-col justify-between">
 	<button
 		on:click={() => goto('/detail/' + id)}
 		data-cy={'activity-item-' + i}

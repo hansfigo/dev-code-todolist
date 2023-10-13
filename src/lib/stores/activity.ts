@@ -8,7 +8,7 @@ interface activity {
 
 const activityList = writable<activity[]>();
 export const sortByStore = writable('newest')
-
+export const isDeleted = writable(false)
 
 export default activityList
 

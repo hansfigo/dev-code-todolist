@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ActivityCard from '$lib/components/ActivityCard.svelte';
-	import activityList from '$lib/stores/activity.js';
+	import activityList, { isDeleted } from '$lib/stores/activity.js';
 	import api from '$lib/utils/api';
 	import { fly } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
@@ -32,7 +32,7 @@
 	{#if $activityList.length === 0 || $activityList.length <= 0}
 		<div data-cy="activity-empty-state" class="flex justify-center items-center w-full h-full">
 			<button
-			data-cy="activity-empty-state"
+				data-cy="activity-empty-state"
 				on:click={async () => {
 					await api.send();
 					isAdded.set(true);
@@ -72,6 +72,32 @@
 					/></svg
 				>
 				<span>Data Berhasil Ditambah</span>
+			</div>
+		</div>
+	</div>
+{/if}
+
+{#if $isDeleted}
+	<div
+		data-cy="modal-information"
+		transition:fly={{ duration: 600, x: 100, y: 500, opacity: 0.5, easing: quintOut }}
+		class="flex justify-center items-center w-full"
+	>
+		<div class="container">
+			<div class="alert alert-danger">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="stroke-current shrink-0 h-6 w-6"
+					fill="none"
+					viewBox="0 0 24 24"
+					><path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth="2"
+						d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+					/></svg
+				>
+				<span>Data Berhasil Dihapus</span>
 			</div>
 		</div>
 	</div>
