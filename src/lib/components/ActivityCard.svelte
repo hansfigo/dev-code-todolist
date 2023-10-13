@@ -26,12 +26,11 @@
 	<div class="flex justify-between w-full items-center">
 		<p data-cy="activity-item-date" class="text-gray-500 text-sm">{convertDate(created_at)}</p>
 		<button
-			data-cy="activity-item-delete-button"
 			on:click={async () => {
 				openModal('delete_modal');
 			}}
 		>
-			<img class="h-5" src="delete-button.png" alt="" />
+			<img class="h-5" src="delete-button.png" alt="" data-cy="activity-item-delete-button" />
 		</button>
 	</div>
 </div>
