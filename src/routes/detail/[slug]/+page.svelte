@@ -34,7 +34,7 @@
 		isEditing.set(!$isEditing);
 	};
 
-	const saveValue = () => {
+	const updateTitle = () => {
 		activityDetail.update($activityTitleStore, $activityDetailStore.id);
 		toggleIsEditing();
 	};
@@ -79,7 +79,7 @@
 				<input
 					data-cy="todo-title-edit-button"
 					bind:value={$activityTitleStore}
-					on:blur={saveValue}
+					on:blur={() => updateTitle}
 					type="text"
 					class="text-2xl font-bold bg-transparent border-b-2 border-black"
 				/>
