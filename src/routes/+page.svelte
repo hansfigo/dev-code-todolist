@@ -30,7 +30,7 @@
 	</div>
 
 	{#if $activityList.length === 0 || $activityList.length <= 0}
-		<div class="flex justify-center items-center w-full h-full">
+		<div data-cy="activity-empty-state" class="flex justify-center items-center w-full h-full">
 			<button
 			data-cy="activity-empty-state"
 				on:click={async () => {
