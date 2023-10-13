@@ -7,5 +7,8 @@ interface activity {
 }
 
 const activityList = writable<activity[]>();
+export const sortByStore = writable('')
+
 
 export default activityList
+

@@ -3,13 +3,24 @@
 	import AddListItemModal from '$lib/components/AddListItemModal.svelte';
 	import EditListModal from '$lib/components/EditListModal.svelte';
 	import TodoListCard from '$lib/components/TodoListCard.svelte';
+	import { sortByStore } from '$lib/stores/activity.js';
 	import {
 		TodoListItemStore,
 		activityDetail,
 		activityDetailStore,
-		activityTitleStore
+		activityTitleStore,
+
+		type TodoItem
+
 	} from '$lib/utils/activityDetail.js';
 	import { openModal } from '$lib/utils/modal.js';
+	import {
+		sortByNewest,
+		sortByOldest,
+		sortByTitleAZ,
+		sortByTitleZA,
+		sortByIsCompleted
+	} from '$lib/utils/sort.js';
 	import { get, writable } from 'svelte/store';
 
 	export let data;
@@ -27,6 +38,32 @@
 		activityDetail.update($activityTitleStore, $activityDetailStore.id);
 		toggleIsEditing();
 	};
+
+	sortByStore.subscribe((sortBy) => {
+		let sortedItems: TodoItem[] = [];
+
+		if (sortBy === 'newest') {
+			// Jalankan fungsi untuk mengurutkan terbaru
+			sortedItems = sortByNewest($TodoListItemStore);
+		} else if (sortBy === 'oldest') {
+			// Jalankan fungsi untuk mengurutkan terlama
+			sortedItems = sortByOldest($TodoListItemStore);
+		} else if (sortBy === 'az') {
+			// Jalankan fungsi untuk mengurutkan A-Z
+			sortedItems = sortByTitleAZ($TodoListItemStore);
+		} else if (sortBy === 'za') {
+			// Jalankan fungsi untuk mengurutkan Z-A
+			sortedItems = sortByTitleZA($TodoListItemStore);
+		} else if (sortBy === 'complete') {
+			// Jalankan fungsi untuk filter yang sudah selesai
+			sortedItems = sortByIsCompleted($TodoListItemStore);
+		} else {
+			// Tangani kondisi lain jika diperlukan
+		}
+
+		// Set hasil pengurutan ke TodoListItemStore
+		TodoListItemStore.set(sortedItems);
+	});
 </script>
 
 <AddListItemModal id={$activityDetailStore.id} />
@@ -52,12 +89,28 @@
 				</button>
 			{/if}
 		</div>
-		<button
-			data-cy="activity-add-button"
-			on:click={() => openModal('add_list_item_modal')}
-			class="bg-main-blue px-5 py-2 font-semibold rounded-full text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
-			>+ Tambah
-		</button>
+		<div class="flex gap-4">
+			<div class="relative">
+				<select
+					name="Priority"
+					class="select select-bordered w-full"
+					id="prioritySelect"
+					bind:value={$sortByStore}
+				>
+					<option value="newest">Newest</option>
+					<option value="oldest">Oldest</option>
+					<option value="az">A-Z</option>
+					<option value="za">Z-A</option>
+					<option value="complete">Complete</option>
+				</select>
+			</div>
+			<button
+				data-cy="activity-add-button"
+				on:click={() => openModal('add_list_item_modal')}
+				class="bg-main-blue px-5 py-2 font-semibold rounded-full text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
+				>+ Tambah
+			</button>
+		</div>
 	</div>
 	{#if $TodoListItemStore.length === 0 || $TodoListItemStore.length <= 0}
 		<div class="flex justify-center items-center w-full h-full">
