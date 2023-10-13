@@ -13,7 +13,7 @@
 <DeleteModal {title} {id} />
 
 <div
-	data-cy={`activity-item-${i}`}
+	data-cy={`activity-item`}
 	class="w-[235px] h-[235px] px-8 py-6 bg-white rounded-md shadow-sm flex flex-col justify-between"
 >
 	<button
@@ -26,7 +26,7 @@
 	<div class="flex justify-between w-full items-center">
 		<p data-cy="activity-item-date" class="text-gray-500 text-sm">{convertDate(created_at)}</p>
 		<button
-			data-cy="active-item-delete-button"
+			data-cy="activity-item-delete-button"
 			on:click={async () => {
 				openModal('delete_modal');
 			}}
