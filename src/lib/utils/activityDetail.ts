@@ -62,12 +62,13 @@ const useActivityDetail = () => {
         }
     }
 
-    const updateToDoList = async (title: string, id: number, isActive : number, activityId : string) => {
+    const updateToDoList = async (title: string, id: number, isActive : number, activityId : string, priority? :string) => {
         const url = "https://todo.api.devcode.gethired.id/todo-items/" + id;
         const data = {
             id : id,
             title: title,
-            is_active : isActive
+            is_active : isActive,
+            priority: priority
         }
 
         const requestOptions = {
@@ -111,6 +112,7 @@ const useActivityDetail = () => {
         return []
 
     }
+
 
     const post = async (title: string, id: string, priority: string) => {
 

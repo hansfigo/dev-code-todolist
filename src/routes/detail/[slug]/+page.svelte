@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import AddListItemModal from '$lib/components/AddListItemModal.svelte';
+	import EditListModal from '$lib/components/EditListModal.svelte';
 	import TodoListCard from '$lib/components/TodoListCard.svelte';
 	import {
 		TodoListItemStore,
@@ -63,9 +64,16 @@
 			<img class="md:h-[24rem]" src="../todo-empty-state.png" alt="empty" />
 		</div>
 	{:else}
-		<div class="flex flex-col gap-8 w-full mt-8 pb-12">
-			{#each $TodoListItemStore as todo}
-				<TodoListCard id={todo.id} isActive={todo.is_active} priority={todo.priority} activityId={$activityDetailStore.id} title={todo.title}/>
+		<div class="flex flex-col gap-8 w-full mt-8 pb-12 container">
+			{#each $TodoListItemStore as todo, i}
+				<TodoListCard
+					{i}
+					id={todo.id}
+					isActive={todo.is_active}
+					priority={todo.priority}
+					activityId={$activityDetailStore.id}
+					title={todo.title}
+				/>
 			{/each}
 		</div>
 	{/if}
