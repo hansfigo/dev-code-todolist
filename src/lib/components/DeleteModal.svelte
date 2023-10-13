@@ -6,7 +6,7 @@
 </script>
 
 <div>
-	<dialog data-cy="modal-delete"  id="delete_modal" class="modal">
+	<dialog data-cy="todo-modal-delete"  id="delete_modal" class="modal">
 		<div class="modal-box flex flex-col justify-center items-center">
 			<img src="delete-warning.png" alt="" />
 			<p class="py-4 text-center">Apakah anda yakin menghapus activity <br />“{title}”?</p>
