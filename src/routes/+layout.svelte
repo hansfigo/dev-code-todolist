@@ -17,7 +17,7 @@
 			<progress class="progress progress-warning w-full absolute top-0" />
 		{/if}
 
-		<p data-cy="header-title" class="container">TODO LIST APP</p>
+		<p data-cy="header-title" class="container">TO DO LIST APP</p>
 	</div>
 	<slot />
 </div>
