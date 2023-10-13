@@ -71,7 +71,7 @@
 		</button>
 	</div>
 	<button
-		data-cy="todo_item_delete_button"
+		data-cy="todo-item-delete-button"
 		on:click={() => activityDetail.delete(id.toString(), $activityDetailStore.id)}
 	>
 		<img class="h-5" src="../delete-button.png" alt="" />

@@ -24,14 +24,11 @@
 	export let data;
 	const isEditing = writable<boolean>(false);
 
-		
-
 	activityDetailStore.set(data.data);
 	activityTitleStore.set($activityDetailStore.title);
 	TodoListItemStore.set($activityDetailStore.todo_items);
 
 	console.log($TodoListItemStore);
-
 
 	const toggleIsEditing = () => {
 		isEditing.set(!$isEditing);
@@ -61,7 +58,7 @@
 			// Jalankan fungsi untuk filter yang sudah selesai
 			sortedItems = sortByIsCompleted($TodoListItemStore);
 		} else {
-			sortedItems = get(TodoListItemStore)
+			sortedItems = get(TodoListItemStore);
 		}
 
 		// Set hasil pengurutan ke TodoListItemStore
@@ -92,7 +89,7 @@
 					on:click={() => toggleIsEditing()}
 					class="flex gap-4 items-center"
 				>
-					<h1 class="text-2xl font-bold">{$activityTitleStore}</h1>
+					<h1 data-cy="todo-title" class="text-2xl font-bold">{$activityTitleStore}</h1>
 					<img class="h-6 brightness-50" src="../todo-item-edit-button.png" alt="" />
 				</button>
 			{/if}
@@ -100,7 +97,7 @@
 		<div class="flex gap-4">
 			<div class="relative">
 				<select
-				data-cy="todo-sort-button"
+					data-cy="todo-sort-button"
 					name="Priority"
 					class="select select-bordered w-full"
 					id="prioritySelect"
@@ -108,13 +105,13 @@
 				>
 					<option data-cy="sort-latest" value="newest">Newest</option>
 					<option data-cy="sort-oldest" value="oldest">Oldest</option>
-					<option data-cy="sort-az"  value="az">A-Z</option>
-					<option data-cy="sort-za"  value="za">Z-A</option>
+					<option data-cy="sort-az" value="az">A-Z</option>
+					<option data-cy="sort-za" value="za">Z-A</option>
 					<option data-cy="sort-unfinished" value="complete">Belum Selesai</option>
 				</select>
 			</div>
 			<button
-				data-cy="activity-add-button"
+				data-cy="todo-add-button"
 				on:click={() => openModal('add_list_item_modal')}
 				class="bg-main-blue px-5 py-2 font-semibold rounded-full text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
 				>+ Tambah
