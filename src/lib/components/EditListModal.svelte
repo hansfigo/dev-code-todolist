@@ -40,7 +40,7 @@
 				<label for="Priority" class="block mb-2 text-base font-bold">Priority</label>
 				<div class="dropdown">
 					<!-- svelte-ignore a11y-label-has-associated-control -->
-					<label tabIndex={0} class="btn m-1">{priority}</label>
+					<label tabIndex={0} class="btn m-1 z-50">{priority}</label>
 					<ul
 						tabIndex={0}
 						class="dropdown-content bg-red-500 absolute z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
