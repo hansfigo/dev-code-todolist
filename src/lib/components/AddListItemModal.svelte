@@ -36,18 +36,29 @@
 
 			<div>
 				<label for="Priority" class="block mb-2 text-base font-bold">Priority</label>
-				<select
-					data-cy="modal-add-priority-dropdown"
-					name="Priority"
-					class="select select-bordered w-full"
-					bind:value={priority}
-				>
-					<option value="very-high" disabled selected>🔴 Very High</option>
-					<option value="high">🟠 High</option>
-					<option value="normal">🟢 Normal</option>
-					<option value="low">🔵 Low</option>
-					<option value="very-low">🟣 Very Low</option>
-				</select>
+				<div class="dropdown">
+					<label data-cy="modal-add-priority-dropdown" tabIndex={0} class="btn m-1">Select Priority</label>
+					<ul
+						tabIndex={0}
+						class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+					>
+						<li>
+							<a on:click={() => (priority = "very-high")}>🔴 Very High</a>
+						</li>
+						<li>
+							<a on:click={() => (priority = "high")}>🟠 High</a>
+						</li>
+						<li>
+							<a on:click={() => (priority = "normal")}>🟢 Normal</a>
+						</li>
+						<li>
+							<a on:click={() => (priority = "low")}>🔵 Low</a>
+						</li>
+						<li>
+							<a on:click={() => (priority = "very-low")}>🟣 Very Low</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<hr class="mt-8" />

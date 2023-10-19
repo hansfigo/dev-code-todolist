@@ -183,7 +183,8 @@ const useActivityDetail = () => {
         update: update,
         post: post,
         updateToDoList : updateToDoList,
-        delete: remove
+        delete: remove,
+        get : get
     }
 }
 

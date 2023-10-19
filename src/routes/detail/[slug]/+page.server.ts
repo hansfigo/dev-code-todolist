@@ -6,7 +6,6 @@ export const load = (async ({params}) => {
 
     console.log(id);
     
-    
     const url = 'https://todo.api.devcode.gethired.id/activity-groups/'+id;
 
     const res = await fetch(url)
