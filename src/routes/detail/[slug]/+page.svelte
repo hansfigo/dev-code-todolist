@@ -100,7 +100,7 @@
 			<div class="relative bg-red-600">
 				<div class="dropdown">
 					<!-- svelte-ignore a11y-label-has-associated-control -->
-					<label id="prioritySelect" data-cy="todo-sort-button" tabIndex={0} class="btn m-1"
+					<label id="prioritySelect" data-cy="sort-selection" tabIndex={0} class="btn m-1"
 						>Click</label
 					>
 					<ul
