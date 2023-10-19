@@ -54,12 +54,13 @@
 
 		<form method="dialog" class="flex justify-end gap-4 mt-6">
 			<button
+				disabled={$namaListItem === ''}
 				data-cy="modal-add-save-button"
 				on:click={() => {
 					activityDetail.post($namaListItem, id, priority);
 					clearInput();
 				}}
-				class="bg-main-blue px-5 py-2 font-semibold rounded-full text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
+				class="bg-main-blue btn px-5 py-2 font-semibold rounded-full text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
 				>Simpan</button
 			>
 		</form>
