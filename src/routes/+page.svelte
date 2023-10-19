@@ -59,7 +59,7 @@
 {#if $isAdded}
 	<div
 		transition:fly={{ duration: 600, x: 100, y: 500, opacity: 0.5, easing: quintOut }}
-		class="z-50 relative flex justify-center items-center w-full"
+		class="z-50 absolute flex justify-center items-center w-full"
 	>
 		<div class="container">
 			<div class="alert alert-success">
@@ -85,10 +85,10 @@
 	<div
 		data-cy="modal-information"
 		transition:fly={{ duration: 600, x: 100, y: 500, opacity: 0.5, easing: quintOut }}
-		class="z-50 relative flex justify-center items-center w-full"
+		class="z-50 absolute flex justify-center items-center w-full"
 	>
 		<div class="container">
-			<div class="alert alert-danger">
+			<div class="alert alert-error">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="stroke-current shrink-0 h-6 w-6"
