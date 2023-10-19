@@ -27,10 +27,10 @@
 
 <style lang="postcss">
 	.button-delete {
-		@apply bg-red-500 px-8 py-4 rounded-md text-white;
+		@apply bg-red-500 px-8 py-4 rounded-md text-white btn;
 	}
 
 	.batal-button {
-		@apply bg-gray-300 px-8 py-4 rounded-md text-white;
+		@apply bg-gray-300 px-8 py-4 rounded-md text-white btn;
 	}
 </style>
