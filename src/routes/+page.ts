@@ -1,4 +1,4 @@
-import type { PageLoad } from './$types';
+import type { Actions, PageLoad } from './$types';
 
 export let csr = true
 export let ssr = false
@@ -11,3 +11,4 @@ export const load = (async () => {
 
     return { data };
 }) satisfies PageLoad;
+

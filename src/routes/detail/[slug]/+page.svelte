@@ -37,8 +37,39 @@
 		isEditing.set(!$isEditing);
 	};
 
-	const updateTitle = () => {
-		activityDetail.update($activityTitleStore, $activityDetailStore.id);
+	const updateTitle = async () => {
+		const title = get(activityTitleStore);
+		const id = get(activityDetailStore).id;
+		const url = 'https://todo.api.devcode.gethired.id/activity-groups/' + id;
+		const data = {
+			title: title
+		};
+
+		const requestOptions = {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		};
+
+		try {
+			const response = await fetch(url, requestOptions);
+
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			}
+
+			const responseData = await response.json();
+			console.log('Update Judul request berhasil:', responseData);
+
+			const updatedTitle = await activityDetail.get(id);
+
+			activityTitleStore.set(updatedTitle.title);
+		} catch (error) {
+			console.error('Terjadi kesalahan:', error);
+		}
+		// activityDetail.update($activityTitleStore, $activityDetailStore.id);
 		toggleIsEditing();
 	};
 
@@ -195,4 +226,3 @@
 		</div>
 	</div>
 {/if}
-
