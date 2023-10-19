@@ -98,19 +98,47 @@
 		</div>
 		<div class="flex gap-4">
 			<div class="relative">
-				<select
+				<!-- <div class="dropdown">
+					<label tabIndex={0} class="btn m-1">Click</label>
+					<ul
+						tabIndex={0}
+						class=" absolute dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+					>
+						<li><a>Item 1</a></li>
+						<li><a>Item 2</a></li>
+					</ul>
+				</div> -->
+				<details class="dropdown mb-32">
+					<summary data-cy="todo-sort-button" class="m-1 btn">Sort</summary>
+					<ul class="p-2 absolute shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+						<li>
+							<button data-cy="sort-latest" on:click={() => sortByStore.set('newest')}
+								>Newest</button
+							>
+						</li>
+						<li>
+							<button data-cy="sort-oldest" on:click={() => sortByStore.set('oldest')}
+								>Oldest</button
+							>
+						</li>
+						<li><button data-cy="sort-az" on:click={() => sortByStore.set('az')}>A-Z</button></li>
+						<li><button data-cy="sort-za" on:click={() => sortByStore.set('za')}>Z-A</button></li>
+						<li>
+							<button data-cy="sort-unfinished" on:click={() => sortByStore.set('complete')}
+								>Belum Selesai</button
+							>
+						</li>
+					</ul>
+				</details>
+				<!-- <select
 					data-cy="todo-sort-button"
 					name="Priority"
 					class="select select-bordered w-full"
 					id="prioritySelect"
 					bind:value={$sortByStore}
 				>
-					<option data-cy="sort-latest" value="newest">Newest</option>
-					<option data-cy="sort-oldest" value="oldest">Oldest</option>
-					<option data-cy="sort-az" value="az">A-Z</option>
-					<option data-cy="sort-za" value="za">Z-A</option>
-					<option data-cy="sort-unfinished" value="complete">Belum Selesai</option>
-				</select>
+					
+				</select> -->
 			</div>
 			<button
 				data-cy="todo-add-button"
