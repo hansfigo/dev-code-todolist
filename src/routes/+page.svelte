@@ -2,13 +2,13 @@
 	import ActivityCard from '$lib/components/ActivityCard.svelte';
 	import activityList, { activityIdStore, isDeleted } from '$lib/stores/activity.js';
 	import api from '$lib/utils/api';
-	import { fly } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	import { writable } from 'svelte/store';
 	import DeleteModal from '$lib/components/DeleteModal.svelte';
-	import { activityTitleStore } from '$lib/utils/activityDetail.js';
 
 	export let data;
+	let isLoading = false;
 
 	const isAdded = writable(false);
 
@@ -17,18 +17,22 @@
 
 <DeleteModal />
 
-<div class="py-8 flex flex-col items-center h-[80vh] relative px-8">
+<div class="py-8 flex flex-col items-center h-[80vh] relative px-8 overflow-x-hidden">
 	<div class="flex justify-between container">
 		<h1 data-cy="activity-title" class="font-bold text-2xl">Activity</h1>
 		<button
+			disabled={isLoading}
 			data-cy="activity-add-button"
 			on:click={async () => {
+				isLoading = true;
 				await api.send();
+				isLoading = false;
+
 				isAdded.set(true);
 
 				setTimeout(() => isAdded.set(false), 1200);
 			}}
-			class="bg-main-blue px-5 py-2 font-semibold rounded-full text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
+			class="bg-main-blue px-5 disabled:bg-slate-500 py-2 font-semibold rounded-full text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
 			>+ Tambah
 		</button>
 	</div>
@@ -38,7 +42,9 @@
 			<button
 				data-cy="activity-empty-state"
 				on:click={async () => {
+					isLoading = true;
 					await api.send();
+					isLoading = false;
 					isAdded.set(true);
 
 					setTimeout(() => isAdded.set(false), 1200);
@@ -48,7 +54,7 @@
 			</button>
 		</div>
 	{:else}
-		<div class="flex flex-wrap gap-6 items-start w-full justify-between  container mt-4">
+		<div class="flex flex-wrap gap-6 items-start w-full justify-between container mt-4">
 			{#each $activityList as data, i}
 				<ActivityCard created_at={data.created_at} id={data.id} {i} title={data.title} />
 			{/each}
@@ -58,7 +64,7 @@
 
 {#if $isAdded}
 	<div
-		transition:fly={{ duration: 600, x: 100, y: 500, opacity: 0.5, easing: quintOut }}
+		transition:fade={{ duration: 300 }}
 		class="z-50 absolute flex justify-center items-center w-full"
 	>
 		<div class="container">
@@ -84,7 +90,7 @@
 {#if $isDeleted}
 	<div
 		data-cy="modal-information"
-		transition:fly={{ duration: 600, x: 100, y: 500, opacity: 0.5, easing: quintOut }}
+		transition:fade={{ duration: 300 }}
 		class="z-50 absolute flex justify-center items-center w-full"
 	>
 		<div class="container">

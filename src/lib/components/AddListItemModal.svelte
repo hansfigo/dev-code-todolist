@@ -31,8 +31,8 @@
 	}
 </script>
 
-<dialog data-cy="modal-add" id="add_list_item_modal" class="modal">
-	<div class="bg-white px-8 py-8 rounded-lg mb-12 md:min-w-[600px]">
+<dialog data-cy="modal-add" id="add_list_item_modal" class="modal flex items-center justify-center">
+	<div class="bg-white px-8 py-8 rounded-lg md:min-w-[600px]">
 		<div class="flex justify-between items-center">
 			<p data-cy="modal-add-name-title" class="text-lg font-bold pb-4">Tambahkan List Item</p>
 			<form method="dialog">
@@ -98,7 +98,10 @@
 				data-cy="modal-add-save-button"
 				on:click={() => {
 					activityDetail.post($namaListItem, id, priority);
-					clearInput();
+
+					setTimeout(() => {
+						clearInput();
+					}, 400);
 				}}
 				class="bg-main-blue btn px-5 py-2 font-semibold rounded-full text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
 				>Simpan</button

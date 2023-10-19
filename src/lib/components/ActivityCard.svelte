@@ -12,10 +12,10 @@
 	export let created_at: string;
 </script>
 
-
 <div
 	data-cy={`activity-item`}
-	class="w-[235px] h-[235px] px-8 py-6 bg-white rounded-md shadow-sm flex flex-col justify-between">
+	class="w-[235px] h-[235px] px-8 py-6 bg-white rounded-md shadow-sm flex flex-col justify-between"
+>
 	<button
 		on:click={() => goto('/detail/' + id)}
 		data-cy={'activity-item-' + i}
@@ -28,8 +28,8 @@
 		<button
 			on:click={async () => {
 				openModal('delete_modal');
-				activityTitleStore.set(title)
-				activityIdStore.set(id)
+				activityTitleStore.set(title);
+				activityIdStore.set(id);
 			}}
 		>
 			<img class="h-5" src="delete-button.png" alt="" data-cy="activity-item-delete-button" />

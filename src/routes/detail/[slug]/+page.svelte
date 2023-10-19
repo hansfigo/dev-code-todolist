@@ -22,7 +22,7 @@
 	} from '$lib/utils/sort.js';
 	import { quintOut } from 'svelte/easing';
 	import { get, writable } from 'svelte/store';
-	import { fly } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 
 	export let data;
 	const isEditing = writable<boolean>(false);
@@ -173,7 +173,7 @@
 {#if $isDeleted}
 	<div
 		data-cy="modal-information"
-		transition:fly={{ duration: 600, x: 100, y: 500, opacity: 0.5, easing: quintOut }}
+		transition:fade={{ duration: 300 }}
 		class="z-50 absolute flex justify-center items-center w-full"
 	>
 		<div class="container">
@@ -195,4 +195,3 @@
 		</div>
 	</div>
 {/if}
-
