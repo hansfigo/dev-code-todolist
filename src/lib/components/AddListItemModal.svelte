@@ -32,7 +32,7 @@
 </script>
 
 <dialog data-cy="modal-add" id="add_list_item_modal" class="modal flex items-center justify-center">
-	<div class="bg-white px-8 py-8 rounded-lg md:min-w-[600px]">
+	<div class="bg-white z-50 modal-box px-8 py-8 rounded-lg md:min-w-[600px]">
 		<div class="flex justify-between items-center">
 			<p data-cy="modal-add-name-title" class="text-lg font-bold pb-4">Tambahkan List Item</p>
 			<form method="dialog">
