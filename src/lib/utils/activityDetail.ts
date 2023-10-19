@@ -31,13 +31,16 @@ const useActivityDetail = () => {
     }
 
     const update = async (title: string, id: string) => {
-        const url = "https://todo.api.devcode.gethired.id/activity-groups/" + id;
+        // const url = "https://todo.api.devcode.gethired.id/activity-groups/" + id;
+        const url = '/updateTitle'
+
         const data = {
+            id : id,
             title: title
         }
 
         const requestOptions = {
-            method: 'PATCH',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
