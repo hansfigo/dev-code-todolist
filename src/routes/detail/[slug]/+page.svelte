@@ -100,7 +100,7 @@
 			<div class="relative bg-red-600">
 				<div class="dropdown">
 					<!-- svelte-ignore a11y-label-has-associated-control -->
-					<label id="prioritySelect" data-cy="sort-selection" tabIndex={0} class="btn m-1"
+					<label id="prioritySelect" data-cy="todo-sort-button" tabIndex={0} class="btn m-1"
 						>Click</label
 					>
 					<ul
@@ -108,19 +108,19 @@
 						class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
 					>
 						<li>
-							<button data-cy="sort-latest" on:click={() => sortByStore.set('newest')}
+							<button data-cy="sort-selection" on:click={() => sortByStore.set('newest')}
 								>Newest</button
 							>
 						</li>
 						<li>
-							<button data-cy="sort-oldest" on:click={() => sortByStore.set('oldest')}
+							<button data-cy="sort-selection" on:click={() => sortByStore.set('oldest')}
 								>Oldest</button
 							>
 						</li>
-						<li><button data-cy="sort-az" on:click={() => sortByStore.set('az')}>A-Z</button></li>
-						<li><button data-cy="sort-za" on:click={() => sortByStore.set('za')}>Z-A</button></li>
+						<li><button data-cy="sort-selection" on:click={() => sortByStore.set('az')}>A-Z</button></li>
+						<li><button data-cy="sort-selection" on:click={() => sortByStore.set('za')}>Z-A</button></li>
 						<li>
-							<button data-cy="sort-unfinished" on:click={() => sortByStore.set('complete')}
+							<button data-cy="sort-selection" on:click={() => sortByStore.set('complete')}
 								>Belum Selesai</button
 							>
 						</li>
