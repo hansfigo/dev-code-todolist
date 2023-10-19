@@ -10,5 +10,10 @@ const activityList = writable<activity[]>();
 export const sortByStore = writable('newest')
 export const isDeleted = writable(false)
 
+
+export const activityTitleStore = writable('')
+export const activityIdStore = writable('')
+
+
 export default activityList
 

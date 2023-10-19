@@ -1,10 +1,12 @@
 <script lang="ts">
 	import ActivityCard from '$lib/components/ActivityCard.svelte';
-	import activityList, { isDeleted } from '$lib/stores/activity.js';
+	import activityList, { activityIdStore, isDeleted } from '$lib/stores/activity.js';
 	import api from '$lib/utils/api';
 	import { fly } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	import { writable } from 'svelte/store';
+	import DeleteModal from '$lib/components/DeleteModal.svelte';
+	import { activityTitleStore } from '$lib/utils/activityDetail.js';
 
 	export let data;
 
@@ -12,6 +14,8 @@
 
 	activityList.set(data.data.data);
 </script>
+
+<DeleteModal />
 
 <div class="py-8 flex flex-col items-center h-[80vh] relative px-8">
 	<div class="flex justify-between container">

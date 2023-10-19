@@ -76,13 +76,15 @@
 			</button>
 
 			{#if $isEditing}
-				<input
-					data-cy="todo-title-edit-button"
-					bind:value={$activityTitleStore}
-					on:blur={() => updateTitle}
-					type="text"
-					class="text-2xl font-bold bg-transparent border-b-2 border-black"
-				/>
+				<form on:submit={() => updateTitle()}>
+					<input
+						data-cy="todo-title-edit-button"
+						bind:value={$activityTitleStore}
+						on:blur={() => updateTitle}
+						type="text"
+						class="text-2xl font-bold bg-transparent border-b-2 border-black"
+					/>
+				</form>
 			{:else}
 				<button
 					data-cy="todo-title-edit-button"

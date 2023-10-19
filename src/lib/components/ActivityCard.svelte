@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { activityIdStore } from '$lib/stores/activity';
+	import { activityTitleStore } from '$lib/utils/activityDetail';
 	import convertDate from '$lib/utils/date';
 	import { openModal } from '$lib/utils/modal';
 	import DeleteModal from './DeleteModal.svelte';
@@ -10,7 +12,6 @@
 	export let created_at: string;
 </script>
 
-<DeleteModal {title} {id} />
 
 <div
 	data-cy={`activity-item`}
@@ -27,6 +28,8 @@
 		<button
 			on:click={async () => {
 				openModal('delete_modal');
+				activityTitleStore.set(title)
+				activityIdStore.set(id)
 			}}
 		>
 			<img class="h-5" src="delete-button.png" alt="" data-cy="activity-item-delete-button" />
