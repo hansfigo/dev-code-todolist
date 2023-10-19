@@ -37,7 +37,7 @@
 			<div>
 				<label for="Priority" class="block mb-2 text-base font-bold">Priority</label>
 				<div class="dropdown">
-					<label data-cy="modal-add-priority-dropdown" tabIndex={0} class="btn m-1">Select Priority</label>
+					<label data-cy="modal-add-priority-item" tabIndex={0} class="btn m-1">Select Priority</label>
 					<ul
 						tabIndex={0}
 						class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
