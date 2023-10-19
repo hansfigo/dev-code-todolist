@@ -2,25 +2,25 @@
 	import { activityDetail } from '$lib/utils/activityDetail';
 	import { writable } from 'svelte/store';
 
-    export let i : number
+	export let i: number;
 	export let id: number;
-    export let priority : string;
-    export let title : string;
-    export let isActive : number
-    export let activityId : string
+	export let priority: string;
+	export let title: string;
+	export let isActive: number;
+	export let activityId: string;
 
 	const namaListItem = writable('');
 
-    namaListItem.set(title)
+	namaListItem.set(title);
 
-    console.log(priority, title);
-    
+	console.log(priority, title);
+
 	const clearInput = () => {
 		namaListItem.set('');
 	};
 </script>
 
-<dialog id={"edit_list_item_modal"+i} class="modal">
+<dialog id={'edit_list_item_modal' + i} class="modal">
 	<div class="modal-box md:min-w-[600px]">
 		<p class="text-lg font-bold pb-4">Tambahkan List Item</p>
 		<hr />
@@ -38,13 +38,30 @@
 
 			<div>
 				<label for="Priority" class="block mb-2 text-base font-bold">Priority</label>
-				<select name="Priority" class="select select-bordered w-full" bind:value={priority}>
-                    <option value="very-high" selected>🔴 Very High</option>
-                    <option value="high">🟠 High</option>
-                    <option value="normal">🟢 Normal</option>
-                    <option value="low">🔵 Low</option>
-                    <option value="very-low">🟣 Very Low</option>
-                  </select>
+				<div class="dropdown">
+					<!-- svelte-ignore a11y-label-has-associated-control -->
+					<label tabIndex={0} class="btn m-1">{priority}</label>
+					<ul
+						tabIndex={0}
+						class="dropdown-content bg-red-500 absolute z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+					>
+						<li>
+							<a on:click={() => (priority = 'very-high')}>🔴Very High</a>
+						</li>
+						<li>
+							<a on:click={() => (priority = 'high')}>🟠 High</a>
+						</li>
+						<li>
+							<a on:click={() => (priority = 'normal')}>🟢 Normal</a>
+						</li>
+						<li>
+							<a on:click={() => (priority = 'low')}>🔵 Low</a>
+						</li>
+						<li>
+							<a on:click={() => (priority = 'very-low')}>🟣 Very Low</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<hr class="mt-8" />
@@ -52,13 +69,13 @@
 		<form method="dialog" class="flex justify-end gap-4 mt-6">
 			<button
 				on:click={() => {
-					// activityDetail.post($namaListItem, id, priority);
-                    activityDetail.updateToDoList(title, id, isActive, activityId , priority)
+					activityDetail.updateToDoList(title, id, isActive, activityId, priority);
 					clearInput();
 				}}
 				class="bg-main-blue px-5 py-2 font-semibold rounded-full text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
-				>Simpan</button
 			>
+				Simpan
+			</button>
 		</form>
 	</div>
 	<form method="dialog" class="modal-backdrop">

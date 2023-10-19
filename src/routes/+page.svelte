@@ -48,7 +48,7 @@
 			</button>
 		</div>
 	{:else}
-		<div class="flex flex-wrap gap-6 items-start w-full container mt-4">
+		<div class="flex flex-wrap gap-6 items-start w-full justify-between  container mt-4">
 			{#each $activityList as data, i}
 				<ActivityCard created_at={data.created_at} id={data.id} {i} title={data.title} />
 			{/each}
