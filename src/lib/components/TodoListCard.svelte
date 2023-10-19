@@ -54,7 +54,7 @@
 >
 	<div class="flex gap-4">
 		<input
-			data-cy="todo_item_checkbox"
+			data-cy="todo-item-checkbox"
 			type="checkbox"
 			class="checkbox"
 			bind:checked={$isChecked}
@@ -62,11 +62,11 @@
 		/>
 		<p data-cy="todo_item_priority_indicator">{$iconStore}</p>
 		{#if !$isChecked}
-			<p data-cy="todo_item_title">{title}</p>
+			<p data-cy="todo-item-title">{title}</p>
 		{:else}
-			<strike data-cy="todo_item_title" class="text-gray-400">{title}</strike>
+			<strike data-cy="todo-item-title" class="text-gray-400">{title}</strike>
 		{/if}
-		<button data-cy="todo_item_edit_button" on:click={() => openModal('edit_list_item_modal' + i)}>
+		<button data-cy="todo-item-edit-button" on:click={() => openModal('edit_list_item_modal' + i)}>
 			<img class="h-6 brightness-50" src="../todo-item-edit-button.png" alt="" />
 		</button>
 	</div>
