@@ -97,20 +97,16 @@
 			{/if}
 		</div>
 		<div class="flex gap-4">
-			<div class="relative">
-				<!-- <div class="dropdown">
-					<label tabIndex={0} class="btn m-1">Click</label>
+			<div class="relative bg-red-600">
+				<div class="dropdown">
+					<!-- svelte-ignore a11y-label-has-associated-control -->
+					<label id="prioritySelect" data-cy="todo-sort-button" tabIndex={0} class="btn m-1"
+						>Click</label
+					>
 					<ul
 						tabIndex={0}
-						class=" absolute dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+						class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
 					>
-						<li><a>Item 1</a></li>
-						<li><a>Item 2</a></li>
-					</ul>
-				</div> -->
-				<details class="dropdown mb-32">
-					<summary data-cy="todo-sort-button" class="m-1 btn">Sort</summary>
-					<ul class="p-2 absolute shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
 						<li>
 							<button data-cy="sort-latest" on:click={() => sortByStore.set('newest')}
 								>Newest</button
@@ -129,16 +125,7 @@
 							>
 						</li>
 					</ul>
-				</details>
-				<!-- <select
-					data-cy="todo-sort-button"
-					name="Priority"
-					class="select select-bordered w-full"
-					id="prioritySelect"
-					bind:value={$sortByStore}
-				>
-					
-				</select> -->
+				</div>
 			</div>
 			<button
 				data-cy="todo-add-button"
