@@ -3,6 +3,7 @@
 	import { writable } from 'svelte/store';
 	import EditListModal from './EditListModal.svelte';
 	import { openModal } from '$lib/utils/modal';
+	import { todoIdStore, todoTitleStore } from '$lib/stores/todo';
 
 	export let activityId: string;
 	export let title: string;
@@ -72,7 +73,11 @@
 	</div>
 	<button
 		data-cy="todo-item-delete-button"
-		on:click={() => activityDetail.delete(id.toString(), $activityDetailStore.id)}
+		on:click={() => {
+			todoTitleStore.set(title)
+			todoIdStore.set(id.toString())
+			openModal('delete_todo_modal');
+		}}
 	>
 		<img class="h-5" src="../delete-button.png" alt="" />
 	</button>

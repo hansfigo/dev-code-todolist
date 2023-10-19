@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import AddListItemModal from '$lib/components/AddListItemModal.svelte';
+	import DeleteTodoListModal from '$lib/components/DeleteTodoListModal.svelte';
 	import EditListModal from '$lib/components/EditListModal.svelte';
 	import TodoListCard from '$lib/components/TodoListCard.svelte';
-	import { sortByStore } from '$lib/stores/activity.js';
+	import { isDeleted, sortByStore } from '$lib/stores/activity.js';
 	import {
 		TodoListItemStore,
 		activityDetail,
@@ -19,7 +20,9 @@
 		sortByTitleZA,
 		sortByIsCompleted
 	} from '$lib/utils/sort.js';
+	import { quintOut } from 'svelte/easing';
 	import { get, writable } from 'svelte/store';
+	import { fly } from 'svelte/transition';
 
 	export let data;
 	const isEditing = writable<boolean>(false);
@@ -67,6 +70,7 @@
 </script>
 
 <AddListItemModal id={$activityDetailStore.id} />
+<DeleteTodoListModal />
 
 <div class="mt-8 flex flex-col items-center h-[80vh] relative px-8">
 	<div class="flex justify-between container">
@@ -97,12 +101,17 @@
 			{/if}
 		</div>
 		<div class="flex gap-4">
-			<div class="relative bg-red-600">
+			<div class="relative">
 				<div class="dropdown">
 					<!-- svelte-ignore a11y-label-has-associated-control -->
-					<label id="prioritySelect" data-cy="todo-sort-button" tabIndex={0} class="btn m-1"
-						>Click</label
+					<label
+						id="prioritySelect"
+						data-cy="todo-sort-button"
+						tabIndex={0}
+						class="btn bg-transparent border-2 border-gray-400 rounded-full h-8 w-12"
 					>
+						<img class="h-6 w-6" src="../tabler-arrows-sort.png" alt="" />
+					</label>
 					<ul
 						tabIndex={0}
 						class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
@@ -117,8 +126,12 @@
 								>Oldest</button
 							>
 						</li>
-						<li><button data-cy="sort-selection" on:click={() => sortByStore.set('az')}>A-Z</button></li>
-						<li><button data-cy="sort-selection" on:click={() => sortByStore.set('za')}>Z-A</button></li>
+						<li>
+							<button data-cy="sort-selection" on:click={() => sortByStore.set('az')}>A-Z</button>
+						</li>
+						<li>
+							<button data-cy="sort-selection" on:click={() => sortByStore.set('za')}>Z-A</button>
+						</li>
 						<li>
 							<button data-cy="sort-selection" on:click={() => sortByStore.set('complete')}
 								>Belum Selesai</button
@@ -156,3 +169,30 @@
 		</div>
 	{/if}
 </div>
+
+{#if $isDeleted}
+	<div
+		data-cy="modal-information"
+		transition:fly={{ duration: 600, x: 100, y: 500, opacity: 0.5, easing: quintOut }}
+		class="z-50 absolute flex justify-center items-center w-full"
+	>
+		<div class="container">
+			<div class="alert alert-error">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="stroke-current shrink-0 h-6 w-6"
+					fill="none"
+					viewBox="0 0 24 24"
+					><path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth="2"
+						d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+					/></svg
+				>
+				<span>Data Berhasil Dihapus</span>
+			</div>
+		</div>
+	</div>
+{/if}
+
