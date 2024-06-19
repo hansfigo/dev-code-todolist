@@ -1,4 +1,8 @@
 {
+	"author": {
+		"name": "dev-code",
+		"email": "figo@x.com"
+	},
 	"name": "dev-code-todolist",
 	"version": "0.0.1",
 	"private": true,
